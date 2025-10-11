@@ -6,6 +6,9 @@ public class No {
 	private int valor;
 	private No filhoEsq;
 	private No filhoDir;
+	private static String respPre = "";
+	private static String respEm = "";
+	private static String respPos = "";
 	
 	public No(int valor) {
 		this.valor = valor;
@@ -41,25 +44,49 @@ public class No {
 			existente.setFilhoEsq(novo);
 		}
 	}
-	
-	public static void exibir(No no) {
-		System.out.print(no.getValor() + " | ");
-		
+
+	public static String exibirPreOrdem(No no) {
+		respPre += no.getValor() + ", ";
 		if(Objects.nonNull(no.getFilhoEsq())) {
-			System.out.print(no.getFilhoEsq().getValor());
+			exibirPreOrdem(no.getFilhoEsq());
 		}
+		if(Objects.nonNull(no.getFilhoDir())) {
+			respPre += no.getFilhoDir().getValor() + ", ";
+			if(Objects.nonNull(no.getFilhoDir().getFilhoEsq())) {
+				exibirPreOrdem(no.getFilhoDir().getFilhoEsq());
+			} 
+			if(Objects.nonNull(no.getFilhoDir().getFilhoDir())) {
+				exibirPreOrdem(no.getFilhoDir().getFilhoDir());
+			}
+		}
+		return respPre;
 	}
-		
-	public static void exibirEmOrdem(No no) {
+	
+	public static String exibirEmOrdem(No no) {
 		if(Objects.nonNull(no.getFilhoEsq())) {
 			exibirEmOrdem(no.getFilhoEsq());
-			System.out.println(no.getValor());
+			respEm += no.getValor() + ", ";
 			if(Objects.nonNull(no.getFilhoDir())) {
 				exibirEmOrdem(no.getFilhoDir());
 			}
 		} else {
-			System.out.println(no.getValor());
+			if(Objects.nonNull(no.getFilhoDir())) {
+				exibirEmOrdem(no.getFilhoDir());
+			}
+			respEm += no.getValor() + ", ";
 		}
+		return respEm;
+	}
+	
+	public static String exibirPosOrdem(No no) {
+		if(Objects.nonNull(no.getFilhoEsq())) {
+			exibirPosOrdem(no.getFilhoEsq());
+		}
+		if(Objects.nonNull(no.getFilhoDir())) {
+			exibirPosOrdem(no.getFilhoDir());
+		}
+		respPos += no.getValor() + ", ";
+		return respPos;
 	}
 	
 	public int getValor() {

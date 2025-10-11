@@ -9,27 +9,22 @@ public class Main {
 	    Scanner scanner = new Scanner(System.in);
 		
 		while(true) {
-			System.out.println("-- Bem-vindo(a) ao sistema das árveres");
-			System.out.println("SELECIONE UMA OPÇÃO: ");
-			System.out.println("1 - Criar arvore");
-			System.out.println("2 - Percurso Em-ordem");
-			System.out.println("3 - Percurso Pré-ordem");
-			System.out.println("4 - Percurso Pós-ordem");
-			int op = Integer.parseInt(scanner.nextLine());
+			System.out.println("Bem-vindo(a) ao sistema das árveres");
+			System.out.println("Digite os elementos a serem inseridos seperados por vírgula. Exemplo: 7,3,4,8,10,25");
+			String entrada = scanner.nextLine();
 			
-			switch(op) {
-				case 1:
-					System.out.println("Digite os elementos a serem inseridos seperados por vírgula. Exemplo: 7,3,4,8,10,25");
-					String entrada = scanner.nextLine();
-					No o = No.criarArvore(entrada);
-					No.exibirEmOrdem(o);
-					System.out.println("\n");
-				break;
+			No o = No.criarArvore(entrada);
+			
+			String preOrdem = No.exibirPreOrdem(o);
+			String emOrdem = No.exibirEmOrdem(o);
+			String posOrdem = No.exibirPosOrdem(o);
+			
+			System.out.println("Pré-ordem: " + preOrdem.substring(0, preOrdem.length() - 2));
+			System.out.println("Em-ordem:  " + emOrdem.substring(0, emOrdem.length() - 2));
+			System.out.println("Pos-ordem: " + posOrdem.substring(0, posOrdem.length() - 2));
+			System.out.println("\n");
+			
 			}
-			
+			// 50,17,12,23,9,14,19,72,54,76,67
 		}
-		
-
-	}
-
 }
